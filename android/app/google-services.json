@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "59973574799",
+    "project_id": "mobile-development-179b3",
+    "storage_bucket": "mobile-development-179b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59973574799:android:57dc6d362cc01213c410fa",
+        "android_client_info": {
+          "package_name": "com.example.pass_do"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59973574799-lufln8hj69g44l2lfqiad3lrtvltafoc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZRBe7LXzhHXtZZDSPstuRnWEydBs4ldA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59973574799-lufln8hj69g44l2lfqiad3lrtvltafoc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "59973574799-muj4rtgn8fmmaj2fikl7r0f36k7k8mpr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.passDo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
