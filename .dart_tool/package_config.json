@@ -32,6 +32,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloud_firestore",
+      "rootUri": "file:///C:/Users/Joseph%20Omamalin/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
       "name": "cloud_firestore_platform_interface",
       "rootUri": "file:///C:/Users/Joseph%20Omamalin/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_platform_interface-5.8.2",
       "packageUri": "lib/",
@@ -218,7 +224,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-10-25T13:39:26.104275Z",
+  "generated": "2022-10-26T11:30:12.887768Z",
   "generator": "pub",
   "generatorVersion": "2.18.2"
 }
