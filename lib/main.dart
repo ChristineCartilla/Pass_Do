@@ -9,9 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  static final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
-
   const MyApp({super.key});
+  static final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
 
   // This widget is the root of your application.
   @override
