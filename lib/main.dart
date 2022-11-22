@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pass_do/constant.dart';
-import 'WelcomeScreen/welcome_screen.dart';
+import 'package:pass_do/customscroll.dart';
+import 'package:pass_do/routes.dart';
+import 'package:pass_do/Screens/WelcomeScreen/welcome_screen.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Pass&Do',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.blue,
-      ),
-      home: const WelcomeScreen(),
-    );
-  }
+  runApp(MaterialApp(
+    scrollBehavior: MyCustomScrollBehavior(),
+    debugShowCheckedModeBanner: false,
+    initialRoute: WelcomeScreen.routeName,
+    routes: routes,
+  ));
 }
