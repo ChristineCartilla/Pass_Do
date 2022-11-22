@@ -63,12 +63,12 @@ class NavigationDrawerWidget extends StatelessWidget {
     required IconData icon,
     VoidCallback? onClicked,
   }) {
-    final color = kPrimaryLightColor;
-    final hoverColor = Colors.white70;
+    const color = kPrimaryLightColor;
+    const hoverColor = Colors.white70;
 
     return ListTile(
       leading: Icon(icon, color: color),
-      title: Text(text, style: TextStyle(color: color)),
+      title: Text(text, style: const TextStyle(color: color)),
       hoverColor: hoverColor,
       onTap: onClicked,
     );
