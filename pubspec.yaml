@@ -47,6 +47,11 @@ dependencies:
   provider: ^6.0.4
   syncfusion_flutter_datagrid: ^20.3.57
   intl: ^0.17.0
+  table_calendar: ^2.3.3
+  flutter_calendar_week: ^3.0.0
+  
+  
+  
 
 
 dev_dependencies:

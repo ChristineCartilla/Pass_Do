@@ -30,8 +30,8 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             buildMenuItem(
-              text: 'Home',
-              icon: Icons.home,
+              text: 'Tasks',
+              icon: Icons.file_copy_rounded,
               onClicked: () => selectedItem(context, 0),
             ),
             const SizedBox(height: 16),
@@ -83,7 +83,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const NotificationPage(),
+          builder: (context) => const Notifications(),
         ));
         break;
       case 2:
@@ -93,7 +93,7 @@ class NavigationDrawerWidget extends StatelessWidget {
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const ProfilePage(),
+          builder: (context) => const UserProfile(),
         ));
         break;
     }

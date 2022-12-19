@@ -53,14 +53,15 @@ class _AdminUsersListState extends State<AdminUsersList> {
                     const SizedBox(
                       width: 10,
                     ),
-                    ElevatedButton(
+
+                    /*ElevatedButton(
                         onPressed: () {
                           _dialogBuilder(context);
                         },
                         child: const Icon(Icons.add)),
                     const SizedBox(
                       width: 10,
-                    ),
+                    ),*/
                   ],
                 ),
               ),
@@ -113,11 +114,11 @@ class _AdminUsersListState extends State<AdminUsersList> {
 
   List<Workload> getWorkloadData() {
     return [
-      Workload(10001, 'Work1', 'Pending'),
-      Workload(10002, 'Work2', 'Ongoing'),
-      Workload(10003, 'Work3', 'Ongoing'),
-      Workload(10004, 'Work4', 'Done'),
-      Workload(10005, 'Work5', 'Done'),
+      Workload(10001, 'User1', 'Active'),
+      Workload(10002, 'User2', 'Active'),
+      Workload(10003, 'User3', 'Active'),
+      Workload(10004, 'User4', 'Active'),
+      Workload(10005, 'User5', 'Active'),
     ];
   }
 }

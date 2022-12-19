@@ -122,6 +122,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_calendar_week",
+      "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_calendar_week-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -218,6 +224,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "simple_gesture_detector",
+      "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/simple_gesture_detector-0.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -260,6 +272,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "table_calendar",
+      "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/table_calendar-2.3.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/acer/AppData/Local/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -290,7 +308,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2022-11-22T06:11:30.641580Z",
+  "generated": "2022-12-19T04:11:28.361324Z",
   "generator": "pub",
   "generatorVersion": "2.18.4"
 }

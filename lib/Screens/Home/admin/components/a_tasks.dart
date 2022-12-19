@@ -117,8 +117,8 @@ class _AdminTaskState extends State<AdminTask> {
       Workload(10001, 'Work1', 'Pending'),
       Workload(10002, 'Work2', 'Ongoing'),
       Workload(10003, 'Work3', 'Ongoing'),
-      Workload(10004, 'Work4', 'Done'),
-      Workload(10005, 'Work5', 'Done'),
+      Workload(10004, 'Work4', 'Inactive'),
+      Workload(10005, 'Work5', 'Inactive'),
     ];
   }
 }

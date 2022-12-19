@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pass_do/Screens/Home/admin/admin_home.dart';
+import 'package:pass_do/Screens/Home/user/worker_home.dart';
 import 'package:pass_do/Screens/Register/register.dart';
 import 'package:pass_do/constant.dart';
 
@@ -116,8 +117,10 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if (_key.currentState!.validate()) {
                                     /*changes must be made if admin login or user login */
+                                    // Navigator.pushReplacementNamed(
+                                    //     context, AdminHome.routeName);
                                     Navigator.pushReplacementNamed(
-                                        context, AdminHome.routeName);
+                                        context, WorkerHome.routeName);
                                   }
                                 },
                                 child: const Text('Login'),

@@ -254,7 +254,7 @@ Future<void> _dialogBuilder(BuildContext context) {
     builder: (BuildContext context) {
       final _formKey = GlobalKey<FormState>();
       return AlertDialog(
-        title: const Text('Edit Profile'),
+        title: const Text('Edit Tasks'),
         content: Stack(
           // overflow: Overflow.visible,
           children: <Widget>[
