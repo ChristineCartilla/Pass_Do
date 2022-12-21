@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pass_do/Screens/Login/login.dart';
 import 'package:pass_do/constant.dart';
+import 'package:pass_do/Services/UserAuth.dart';
 
 class RegisterPage extends StatefulWidget {
   static String routeName = "/register";
@@ -14,6 +16,11 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _key = GlobalKey<FormState>();
+  final TextEditingController _fName = TextEditingController();
+  final TextEditingController _lName = TextEditingController();
+  final TextEditingController _emailAdd = TextEditingController();
+  final TextEditingController _contactNum = TextEditingController();
+  final TextEditingController _org = TextEditingController();
   final TextEditingController _pass = TextEditingController();
   final TextEditingController _confirmPass = TextEditingController();
   //bool _autoValidate = false;
@@ -67,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: 30,
+                                height: 20,
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
@@ -88,7 +95,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               const SizedBox(
-                                height: 20,
+                                height: 15,
                               ),
                               Row(
                                 children: [
@@ -103,6 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       style: const TextStyle(
                                         fontSize: 16,
                                       ),
+                                      controller: _fName,
                                       validator: (value) {
                                         if (value!.isEmpty ||
                                             !RegExp(r'^[a-zA-Z ]+$')
@@ -126,6 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
+                                        controller: _lName,
                                         validator: (value) {
                                           if (value!.isEmpty ||
                                               !RegExp(r'^[a-zA-Z ]+$')
@@ -149,6 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   style: const TextStyle(
                                     fontSize: 16,
                                   ),
+                                  controller: _emailAdd,
                                   validator: (value) {
                                     if (value!.isEmpty ||
                                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$")
@@ -172,6 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
+                                        controller: _contactNum,
                                         validator: (value) {
                                           if (value!.isEmpty ||
                                               !RegExp(r'^(?:[+0][1-9])?[0-9]{10,12}$')
@@ -194,10 +205,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                         ),
+                                        controller: _org,
                                         validator: (value) {
-                                          if (value!.isEmpty ||
-                                              !RegExp(r'^[a-zA-Z0-9 ]+$')
-                                                  .hasMatch(value)) {
+                                          if (value!.isEmpty) {
                                             return "Invalid organization";
                                           } else {
                                             return null;
@@ -220,9 +230,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   controller: _pass,
                                   validator: (value) {
                                     if (value!.isEmpty ||
-                                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
                                             .hasMatch(value)) {
-                                      return "Invalid password";
+                                      return "Password must contain at least 8 characters with\nat least 1 upper case, 1 lower case, and 1 digit";
                                     } else {
                                       return null;
                                     }
@@ -254,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       return null;
                                     }
                                   }),
-                              const SizedBox(height: 30.0),
+                              const SizedBox(height: 20.0),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: Size(150, 48),
@@ -269,9 +279,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                                 onPressed: () {
                                   if (_key.currentState!.validate()) {
+                                    addUser();
+
                                     _dialogBuilder(context);
                                   }
-                                  ;
                                 },
                                 child: const Text('Register'),
                               ),
@@ -331,6 +342,36 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
+
+  Future<void> addUser() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('Users');
+    // Call the user's CollectionReference to add a new user
+    return await users
+        .add({
+          'First Name': _fName.text,
+          'Last Name': _lName.text,
+          'Email Address': _emailAdd.text,
+          'Contact Number': _contactNum.text,
+          'Organization': _org.text,
+          'Password': _confirmPass.text,
+          'User Type': _selectedValue.toString()
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  Future<bool> checkIfDocExists() async {
+    try {
+      // Get reference to Firestore collection
+      var collectionRef = FirebaseFirestore.instance.collection('Users');
+
+      var doc = await collectionRef.doc(_emailAdd.text).get();
+
+      return doc.exists;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
 
 Future<void> _dialogBuilder(BuildContext context) {
@@ -338,7 +379,7 @@ Future<void> _dialogBuilder(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Sucessfully Register User'),
+        title: const Text('User Registered Successfully'),
         actions: <Widget>[
           TextButton(
             style: TextButton.styleFrom(

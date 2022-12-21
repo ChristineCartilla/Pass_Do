@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pass_do/Screens/Home/admin/admin_home.dart';
 import 'package:pass_do/Screens/Home/user/worker_home.dart';
@@ -14,7 +15,14 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _key = GlobalKey<FormState>();
+  final TextEditingController _emailAdd = TextEditingController();
   final TextEditingController _pass = TextEditingController();
+  final List<String> roleItems = [
+    'User',
+    'Admin',
+  ];
+  String? _selectedValue = 'User';
+
   @override
   Widget build(BuildContext context) {
     Size bodySize = MediaQuery.of(context).size;
@@ -57,7 +65,28 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: 100,
+                                height: 25,
+                              ),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  value: _selectedValue,
+                                  items: roleItems
+                                      .map((e) => DropdownMenuItem(
+                                            child: Text(e),
+                                            value: e,
+                                          ))
+                                      .toList(),
+                                  onChanged: (val) {
+                                    setState(() {
+                                      this._selectedValue = val;
+                                    });
+                                  },
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 50,
                               ),
                               TextFormField(
                                   decoration: const InputDecoration(
@@ -66,11 +95,12 @@ class _LoginPageState extends State<LoginPage> {
                                     border: OutlineInputBorder(),
                                     hintStyle: TextStyle(fontSize: 15),
                                   ),
+                                  controller: _emailAdd,
                                   validator: (value) {
                                     if (value!.isEmpty ||
                                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$")
                                             .hasMatch(value)) {
-                                      return "Invalid name";
+                                      return "Invalid email address";
                                     } else {
                                       return null;
                                     }
@@ -86,9 +116,9 @@ class _LoginPageState extends State<LoginPage> {
                                   controller: _pass,
                                   validator: (value) {
                                     if (value!.isEmpty ||
-                                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')
                                             .hasMatch(value)) {
-                                      return "Invalid password";
+                                      return "Password must contain at least 8 characters with\nat least 1 upper case, 1 lower case, and 1 digit";
                                     } else {
                                       return null;
                                     }
@@ -119,8 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                                     /*changes must be made if admin login or user login */
                                     // Navigator.pushReplacementNamed(
                                     //     context, AdminHome.routeName);
-                                    Navigator.pushReplacementNamed(
-                                        context, WorkerHome.routeName);
+                                    if (_selectedValue == 'User') {
+                                      Navigator.pushReplacementNamed(
+                                          context, WorkerHome.routeName);
+                                    } else {
+                                      Navigator.pushReplacementNamed(
+                                          context, AdminHome.routeName);
+                                    }
                                   }
                                 },
                                 child: const Text('Login'),
@@ -138,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: const Text('Forgot Password?'),
                               ),
                               const SizedBox(
-                                height: 70,
+                                height: 60,
                               ),
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -190,5 +225,26 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    var collection = FirebaseFirestore.instance.collection('Users');
+    var docSnapshot = await collection.doc(_emailAdd.text).get();
+    if (docSnapshot.exists) {
+      Map<String, dynamic> data = docSnapshot.data()!;
+
+      // You can then retrieve the value from the Map like this:
+      String name = data['User Type'];
+
+      if (name == 'User') {
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, WorkerHome.routeName);
+      } else if (name == 'Admin') {
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, AdminHome.routeName);
+      } else {
+        const AlertDialog(title: Text('User does not exist'));
+      }
+    }
   }
 }
